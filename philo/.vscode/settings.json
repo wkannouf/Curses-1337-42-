@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"philo.h": "c",
+		"__threading_support": "c",
+		"mutex": "c",
+		"time.h": "c",
+		"unistd.h": "c",
+		"chrono": "c"
+	}
+}
