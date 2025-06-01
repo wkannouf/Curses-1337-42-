@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:12:15 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/05/25 17:43:06 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:42:33 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	*routine(void *argv)
 		time_mange(philo->rules->time_to_eat / 2, philo);
 	while (1)
 	{
+		pthread_mutex_lock(&philo->rules->protect);
+		if (philo->rules->fail_creat == 1)
+			return (pthread_mutex_unlock(&philo->rules->protect), NULL);
+		pthread_mutex_unlock(&philo->rules->protect);
 		pthread_mutex_lock(&philo->rules->check_death);
 		if (philo->rules->is_death == 5)
 		{

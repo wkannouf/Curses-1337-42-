@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:49:59 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 19:41:46 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:02:01 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	free_des(t_philo *philo)
 	pthread_mutex_destroy(&philo->rules->check_death);
 	pthread_mutex_destroy(&philo->rules->check_eat);
 	pthread_mutex_destroy(&philo->rules->n_eat);
-	free(philo);
 	free(philo->rules->forks);
+	free(philo);
 }
 
 static int	arguments(int argc, char **argv, t_rules *rules)
@@ -54,6 +54,7 @@ static int	arguments(int argc, char **argv, t_rules *rules)
 	if (argc != 5 && argc != 6)
 		return (write(2, "argc != 5\n", 10), 0);
 	rules->is_death = 0;
+	rules->fail_creat = 0;
 	rules->count_philos = ft_atoi(argv[1]);
 	if (rules->count_philos == 0)
 		return (5);
@@ -84,9 +85,9 @@ static int	one_philo(t_philo *philos)
 		printf("0 1 has taken a fork\n");
 		pthread_mutex_unlock(&philos->rules->forks[philos->left]);
 		time_mange(philos->rules->time_to_die, NULL);
-		return (printf("%zu 1 died\n", philos->rules->time_to_die), 1);
+		return (printf("%zu 1 died\n", philos->rules->time_to_die), 0);
 	}
-	return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -107,8 +108,8 @@ int	main(int argc, char **argv)
 		return (free(philos), free(rules.forks), 1);
 	if (!init(philos))
 		return (free(philos), free(rules.forks), 1);
-	if (one_philo(philos) == 1)
-		return (1);
+	if (!one_philo(philos))
+		return (free_des(philos), 0);
 	if (!philo_create(philos, 0, 0))
 		return (free(philos), free(rules.forks), 1);
 	free_des(philos);

@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:04 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/05/26 10:51:24 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:40:23 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,30 @@ static int	handle_threads(t_philo *philo, pthread_t *threads)
 	i = 0;
 	if (pthread_create(&mon, NULL, ft_check_died, philo) != 0)
 	{
-		while (i < philo->rules->count_philos)
-		{
-			pthread_detach(threads[i]);
-			i++;
-		}
+		pthread_mutex_lock(&philo->rules->protect);
+		philo->rules->fail_creat = 1;
+		pthread_mutex_unlock(&philo->rules->protect);
 		return (0);
 	}
 	i = 0;
 	while (i < philo->rules->count_philos)
 	{
 		if (pthread_join(threads[i], NULL) != 0)
+		{
+			pthread_mutex_lock(&philo->rules->protect);
+			philo->rules->fail_creat = 1;
+			pthread_mutex_unlock(&philo->rules->protect);
 			return (0);
+		}
 		i++;
 	}
 	if (pthread_join(mon, NULL) != 0)
+	{
+		pthread_mutex_lock(&philo->rules->protect);
+		philo->rules->fail_creat = 1;
+		pthread_mutex_unlock(&philo->rules->protect);
 		return (0);
+	}
 	return (1);
 }
 
@@ -49,20 +57,30 @@ int	philo_create(t_philo *philo, size_t i, size_t j)
 	while (i < philo->rules->count_philos)
 	{
 		if (pthread_create(&threads[i], NULL, routine, &philo[i]) != 0)
+		{
+			pthread_mutex_lock(&philo->rules->protect);
+			philo->rules->fail_creat = 1;
+			pthread_mutex_unlock(&philo->rules->protect);
 			break ;
+		}
 		i++;
 	}
 	if (i != philo->rules->count_philos)
 	{
 		while (j < i)
 		{
-			pthread_join(threads[j], NULL);
+			if (pthread_join(threads[j], NULL) != 0)
+			{
+				pthread_mutex_lock(&philo->rules->protect);
+				philo->rules->fail_creat = 1;
+				pthread_mutex_unlock(&philo->rules->protect);
+				break ;
+			}
 			j++;
 		}
 		return (free(threads), 0);
 	}
 	if (handle_threads(philo, threads) == 0)
 		return (free(threads), 0);
-	free(threads);
-	return (1);
+	return (free(threads), 1);
 }

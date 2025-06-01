@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 23:28:20 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/05/25 19:59:22 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:40:23 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ typedef struct s_rules_philosophe
 	size_t			time_eating;
 	size_t			start_time;
 	size_t			is_death;
+	size_t			fail_creat;
 	pthread_mutex_t	check_death;
 	pthread_mutex_t	check_eat;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	n_eat;
+	pthread_mutex_t	protect;
 }	t_rules;
 
 typedef struct s_philo_inf

@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:31:20 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/05/25 15:14:35 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:40:23 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	init(t_philo *philo)
 		pthread_mutex_destroy(&philo->rules->print);
 		pthread_mutex_destroy(&philo->rules->check_death);
 		return (pthread_mutex_destroy(&philo->rules->check_eat), 0);
+	}
+	if (pthread_mutex_init(&philo->rules->protect, NULL) != 0)
+	{
+		pthread_mutex_destroy(&philo->rules->print);
+		pthread_mutex_destroy(&philo->rules->check_death);
+		pthread_mutex_destroy(&philo->rules->check_eat);
+		return (pthread_mutex_destroy(&philo->rules->n_eat), 0);
 	}
 	return (1);
 }
