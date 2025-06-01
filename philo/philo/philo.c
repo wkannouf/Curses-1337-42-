@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:49:59 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 22:02:01 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:38:16 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_des(t_philo *philo)
 	pthread_mutex_destroy(&philo->rules->check_death);
 	pthread_mutex_destroy(&philo->rules->check_eat);
 	pthread_mutex_destroy(&philo->rules->n_eat);
+	pthread_mutex_destroy(&philo->rules->protect);
 	free(philo->rules->forks);
 	free(philo);
 }
@@ -111,6 +112,6 @@ int	main(int argc, char **argv)
 	if (!one_philo(philos))
 		return (free_des(philos), 0);
 	if (!philo_create(philos, 0, 0))
-		return (free(philos), free(rules.forks), 1);
+		return (free_des(philos), 1);
 	free_des(philos);
 }

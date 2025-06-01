@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:11:06 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/05/25 17:21:35 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:33:20 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	time_eat(t_philo *philo)
 			return (pthread_mutex_unlock(&philo->rules->n_eat), \
 				pthread_mutex_unlock(&philo->rules->check_eat), 0);
 		pthread_mutex_unlock(&philo->rules->n_eat);
-		pthread_mutex_unlock(&philo->rules->check_eat);
 	}
 	pthread_mutex_unlock(&philo->rules->check_eat);
 	return (1);
@@ -49,7 +48,8 @@ void	*ft_check_died(void *arg)
 {
 	t_philo	*philo;
 	size_t	i;
-
+	size_t	now;
+		
 	philo = (t_philo *)arg;
 	while (1)
 	{
@@ -57,10 +57,10 @@ void	*ft_check_died(void *arg)
 		i = 0;
 		while (i < philo->rules->count_philos)
 		{
-			philo->now = get_time();
+			now = get_time();
 			if (time_eat(philo) == 0)
 				return (NULL);
-			if (ft_died(philo, i, philo->now) == 0)
+			if (ft_died(philo, i, now) == 0)
 				return (NULL);
 			i++;
 		}

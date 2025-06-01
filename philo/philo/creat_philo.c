@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:04 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 22:40:23 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:06:01 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	philo_create(t_philo *philo, size_t i, size_t j)
 		return (0);
 	while (i < philo->rules->count_philos)
 	{
-		if (pthread_create(&threads[i], NULL, routine, &philo[i]) != 0)
+		if (pthread_create(&threads[i], NULL, routine, &philo[i]) != 0 || i == 5)
 		{
 			pthread_mutex_lock(&philo->rules->protect);
 			philo->rules->fail_creat = 1;

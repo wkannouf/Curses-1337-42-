@@ -6,12 +6,12 @@
 #    By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 22:48:43 by wkannouf          #+#    #+#              #
-#    Updated: 2025/05/25 15:43:50 by wkannouf         ###   ########.fr        #
+#    Updated: 2025/06/01 23:03:00 by wkannouf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 
 SRC = philo.c utils.c routine.c time.c check_died.c creat_philo.c init.c
 OBJS = philo.o utils.o routine.o time.o check_died.o creat_philo.o init.o

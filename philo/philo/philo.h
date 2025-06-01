@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 23:28:20 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 22:40:23 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:25:21 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_philo_inf
 	size_t	left;
 	t_rules	*rules;
 	size_t	n_eating;
-	size_t	now;
 }	t_philo;
 
 size_t	ft_atoi(const char *str);
