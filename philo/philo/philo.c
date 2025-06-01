@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:49:59 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 19:15:54 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:41:46 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static int	one_philo(t_philo *philos)
 		printf("0 1 has taken a fork\n");
 		pthread_mutex_unlock(&philos->rules->forks[philos->left]);
 		time_mange(philos->rules->time_to_die, NULL);
-		return (printf("%zu 1 died\n", philos->rules->time_to_die), 0);
+		return (printf("%zu 1 died\n", philos->rules->time_to_die), 1);
 	}
-	return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
