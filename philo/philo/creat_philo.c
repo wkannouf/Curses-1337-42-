@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:04 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/02 22:59:48 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/02 23:03:49 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static int	join_thraeds(t_philo *philo, pthread_t *threads)
 
 static int	handle_threads(t_philo *philo, pthread_t *threads)
 {
-	size_t		i;
 	pthread_t	mon;
 
-	i = 0;
 	if (pthread_create(&mon, NULL, ft_check_died, philo) != 0)
 	{
 		pthread_mutex_lock(&philo->rules->protect);
