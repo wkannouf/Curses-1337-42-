@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:04 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/02 21:54:15 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:59:48 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	join_thraeds(t_philo *philo, pthread_t *threads)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < philo->rules->count_philos)
 	{
@@ -55,11 +55,11 @@ static int	handle_threads(t_philo *philo, pthread_t *threads)
 	return (1);
 }
 
-static int f(t_philo *philo, pthread_t *threads)
+static int	f(t_philo *philo, pthread_t *threads)
 {
 	size_t	j;
 	size_t	i;
-	
+
 	i = 0;
 	j = 0;
 	if (i != philo->rules->count_philos)

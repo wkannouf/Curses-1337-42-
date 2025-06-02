@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:11:06 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 23:33:20 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/02 23:00:12 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*ft_check_died(void *arg)
 	t_philo	*philo;
 	size_t	i;
 	size_t	now;
-		
+
 	philo = (t_philo *)arg;
 	while (1)
 	{
