@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:49:59 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 23:38:16 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:54:49 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 		return (free(philos), free(rules.forks), 1);
 	if (!one_philo(philos))
 		return (free_des(philos), 0);
-	if (!philo_create(philos, 0, 0))
+	if (!philo_create(philos, 0))
 		return (free_des(philos), 1);
 	free_des(philos);
 }

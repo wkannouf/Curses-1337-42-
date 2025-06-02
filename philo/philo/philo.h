@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 23:28:20 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/06/01 23:25:21 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:54:39 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	time_mange(size_t t, t_philo *philo);
 void	ft_print_mutex(char *str, t_philo *philo);
 void	*ft_check_died(void *arg);
 void	*routine(void *argv);
-int		philo_create(t_philo *philo, size_t i, size_t j);
+int		philo_create(t_philo *philo, size_t i);
 int		init(t_philo *philo);
 int		alloc(t_rules *rules, t_philo *philos);
 int		init_des_forks(t_philo *philo);
