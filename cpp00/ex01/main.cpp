@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 19:23:54 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/10/21 19:49:10 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:31:46 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main()
 	{
 		std::cout << PINK "ENTER PLEASE (ADD, SEARCH OR EXIT): " DEF;
 		std::cout << L_BLUE;
-		std::cin >> command;
+		std::getline(std::cin, command);
 		std::cout << DEF;
 		if (std::cin.eof())
 			return (1);
