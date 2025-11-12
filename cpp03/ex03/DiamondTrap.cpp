@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 01:23:17 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/11/11 01:37:52 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/11/13 00:48:04 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &diamond)
 	return (*this);
 }
 
+void	DiamondTrap::attack(const std::string& target)
+{
+	ScavTrap::attack(target);
+}
 void	DiamondTrap::whoAmI()
 {
 	std::cout << GREY "both its " << name << " and its ClapTrap " << ClapTrap::name << "\n" DEF;

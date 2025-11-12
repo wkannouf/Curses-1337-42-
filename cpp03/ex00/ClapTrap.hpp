@@ -6,7 +6,7 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:57:15 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/11/11 01:52:48 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:14:37 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 class	ClapTrap
 {
 	private:
+		std::string				name;
 		unsigned int			hit_points;
 		unsigned int			energy_points;
 		unsigned int			attack_damage;
