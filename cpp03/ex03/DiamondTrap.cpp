@@ -6,13 +6,13 @@
 /*   By: wkannouf <wkannouf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 01:23:17 by wkannouf          #+#    #+#             */
-/*   Updated: 2025/11/13 00:48:04 by wkannouf         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:18:19 by wkannouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap() : ClapTrap("Emma_clap_name")
 {
 	std::cout << GREEN "Default constructor DiamondTrap called!\n" DEF;
 	this->name = "Emma";
@@ -30,7 +30,7 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), Scav
 	attack_damage = FragTrap::attack_damage;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &diamond)
+DiamondTrap::DiamondTrap(const DiamondTrap &diamond) : ClapTrap(diamond), ScavTrap(diamond), FragTrap(diamond)
 {
 	std::cout << GREEN "Copy constructor DiamondTrap called!\n" DEF;
 	*this = diamond;
