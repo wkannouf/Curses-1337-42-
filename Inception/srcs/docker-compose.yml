@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   mariadb:
     image: mariadb:1.0
@@ -49,18 +47,7 @@ services:
 
 volumes:
   db_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wkannouf/data/db
-
   wordpress_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wkannouf/data/wordpress
 
 networks:
   inception:

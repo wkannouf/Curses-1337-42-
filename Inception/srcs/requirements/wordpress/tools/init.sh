@@ -6,10 +6,19 @@ DB_PASSWORD=$(cat /run/secrets/db_password)
 
 echo "Waiting for MariaDB..."
 
-until mysql -h mariadb -u"$MYSQL_USER" -p"$DB_PASSWORD" -e "SELECT 1;" >/dev/null 2>&1
-do
+database_ready=false
+for attempt in $(seq 1 30); do
+    if mysql -h mariadb -u"$MYSQL_USER" -p"$DB_PASSWORD" -e "SELECT 1;" >/dev/null 2>&1; then
+        database_ready=true
+        break
+    fi
     sleep 2
 done
+
+if [ "$database_ready" != true ]; then
+    echo "MariaDB did not become available in time." >&2
+    exit 1
+fi
 
 echo "MariaDB is ready."
 

@@ -1,4 +1,4 @@
-COMPOSE = docker-compose -f srcs/docker-compose.yml
+COMPOSE = docker compose -f srcs/docker-compose.yml
 
 all:
 	$(COMPOSE) up -d --build
@@ -24,3 +24,5 @@ fclean:
 re:
 	$(COMPOSE) down -v
 	$(COMPOSE) up -d --build
+
+.PHONY: all build up down restart clean fclean re
