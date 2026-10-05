@@ -24,16 +24,20 @@ echo "MariaDB is ready."
 
 cd /var/www/html
 
-if [ ! -f wp-load.php ]; then
+if [ ! -f wp-includes/version.php ]; then
     wp core download --allow-root
+fi
 
+if [ ! -f wp-config.php ]; then
     wp config create \
         --dbname="$MYSQL_DATABASE" \
         --dbuser="$MYSQL_USER" \
         --dbpass="$DB_PASSWORD" \
         --dbhost="mariadb:3306" \
         --allow-root
+fi
 
+if ! wp core is-installed --allow-root >/dev/null 2>&1; then
     wp core install \
         --url="https://$DOMAIN_NAME" \
         --title="Inception" \
@@ -42,15 +46,17 @@ if [ ! -f wp-load.php ]; then
         --admin_email="$WP_ADMIN_EMAIL" \
         --skip-email \
         --allow-root
-
-    wp user create \
-    wissal \
-    wissal@wkannouf.42.fr \
-    --role=subscriber \
-    --user_pass="$(cat /run/secrets/wp_user_password)" \
-    --allow-root
-
-    chown -R www-data:www-data /var/www/html
 fi
+
+if ! wp user get wissal --field=ID --allow-root >/dev/null 2>&1; then
+    wp user create \
+        wissal \
+        wissal@wkannouf.42.fr \
+        --role=subscriber \
+        --user_pass="$(cat /run/secrets/wp_user_password)" \
+        --allow-root
+fi
+
+chown -R www-data:www-data /var/www/html
 
 exec php-fpm8.2 -F
