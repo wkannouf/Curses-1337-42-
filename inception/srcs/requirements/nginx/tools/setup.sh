@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set -eu
 
 certificate_dir="/etc/nginx/ssl"
 certificate="$certificate_dir/wkannouf.42.fr.crt"

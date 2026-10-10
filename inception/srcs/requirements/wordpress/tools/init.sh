@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 DB_PASSWORD=$(cat /run/secrets/db_password)
 

@@ -11,7 +11,7 @@ Docker isolates application services in lightweight containers that share the ho
 ## Instructions
 
 1. Configure Docker's `data-root` under `/home/wkannouf/data/docker` on the virtual machine.
-2. Create `srcs/.env` from the local project configuration and create the four ignored files in `secrets/`.
+2. Copy `srcs/.env.example` to `srcs/.env`, adapt its non-sensitive values, and create the four ignored files in `secrets/`.
 3. Add `127.0.0.1 wkannouf.42.fr` to the virtual machine's `/etc/hosts` file.
 4. Run `make`.
 5. Open `https://wkannouf.42.fr`. A self-signed certificate warning is expected.
@@ -25,4 +25,6 @@ Use `make ps` to inspect services, `make logs` to follow logs, `make clean` to s
 - WordPress CLI documentation: https://wp-cli.org/
 - NGINX documentation: https://nginx.org/en/docs/
 
-AI was used to help review configuration and explain Docker concepts. All generated changes were reviewed and tested with shell syntax checks before use.
+## AI usage
+
+AI was used to explain Docker concepts and to review the configuration. The implementation was checked manually, and the author must be able to explain every Dockerfile, Compose option, script, volume, network, and security choice during the evaluation.

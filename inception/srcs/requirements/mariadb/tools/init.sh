@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
@@ -32,43 +32,25 @@ DB_PASSWORD_SQL=$(sql_escape "$DB_PASSWORD")
 
 init_marker="/var/lib/mysql/.inception_initialized"
 
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql
+fi
+
 if [ ! -f "$init_marker" ]; then
-    if [ ! -d "/var/lib/mysql/mysql" ]; then
-        mysql_install_db --user=mysql --datadir=/var/lib/mysql
-    fi
+    init_file=$(mktemp)
+    chmod 600 "$init_file"
+    chown mysql:mysql "$init_file"
 
-    mysqld --user=mysql --skip-networking &
-    MYSQL_PID=$!
-
-    database_ready=false
-    for attempt in $(seq 1 30); do
-        if mariadb-admin ping --silent; then
-            database_ready=true
-            break
-        fi
-        sleep 1
-    done
-
-    if [ "$database_ready" != true ]; then
-        echo "MariaDB initialization timed out." >&2
-        exit 1
-    fi
-
-    mariadb -u root <<EOF
+    cat > "$init_file" <<EOF
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD_SQL}';
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD_SQL}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
+SELECT 'initialized' INTO OUTFILE '${init_marker}';
 EOF
 
-    mariadb -u "${MYSQL_USER}" -p"${DB_PASSWORD}" "${MYSQL_DATABASE}" -e 'SELECT 1;' >/dev/null
-
-    mariadb-admin -u root -p"${DB_ROOT_PASSWORD}" shutdown
-    wait "$MYSQL_PID"
-
-    touch "$init_marker"
-    chown mysql:mysql "$init_marker"
+    exec mysqld --user=mysql --console --init-file="$init_file"
 fi
 
 exec mysqld --user=mysql --console

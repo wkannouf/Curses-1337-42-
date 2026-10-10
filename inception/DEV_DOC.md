@@ -4,7 +4,7 @@
 
 Use a Debian virtual machine with Docker Engine and the Docker Compose plugin. Configure Docker's `data-root` as `/home/wkannouf/data/docker`; Docker named volumes will then persist under `/home/wkannouf/data/docker/volumes` without bind mounts.
 
-Create `srcs/.env` from `srcs/.env.example`; it defines `DOMAIN_NAME`, `MYSQL_DATABASE`, `MYSQL_USER`, `WP_ADMIN_USER`, `WP_ADMIN_EMAIL`, `WP_USER`, and `WP_USER_EMAIL`. Create the ignored secret files `secrets/db_password.txt`, `secrets/db_root_password.txt`, `secrets/wp_admin_password.txt`, and `secrets/wp_user_password.txt`.
+Copy `srcs/.env.example` to `srcs/.env`; it defines `DOMAIN_NAME`, `MYSQL_DATABASE`, `MYSQL_USER`, `WP_ADMIN_USER`, `WP_ADMIN_EMAIL`, `WP_USER`, and `WP_USER_EMAIL`. Create the ignored secret files `secrets/db_password.txt`, `secrets/db_root_password.txt`, `secrets/wp_admin_password.txt`, and `secrets/wp_user_password.txt`, then protect them with `chmod 600 secrets/*.txt`.
 
 ## Build and run
 
