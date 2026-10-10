@@ -1,4 +1,4 @@
-COMPOSE := docker compose -f srcs/docker-compose.yml
+COMPOSE = docker compose -f srcs/docker-compose.yml
 
 all: up
 
@@ -14,19 +14,19 @@ down:
 restart:
 	$(COMPOSE) restart
 
-clean: down
+clean:
+	$(COMPOSE) down --volumes --remove-orphans
 
 logs:
 	$(COMPOSE) logs -f
 
-fclean:
-	$(COMPOSE) down --volumes --remove-orphans
+fclean: clean
+	docker system prune -af
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
 
 ps:
 	$(COMPOSE) ps
 
 .PHONY: all build up down restart clean logs fclean re ps
+
