@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -e
+set -eu
 
-DB_PASSWORD=$(cat /run/secrets/db_password)
+DB_PASSWORD="$MYSQL_PASSWORD"
 
 echo "Waiting for MariaDB..."
 
@@ -42,7 +42,7 @@ if ! wp core is-installed --allow-root >/dev/null 2>&1; then
         --url="https://$DOMAIN_NAME" \
         --title="Inception" \
         --admin_user="$WP_ADMIN_USER" \
-        --admin_password="$(cat /run/secrets/wp_admin_password)" \
+        --admin_password="$WP_ADMIN_PASSWORD" \
         --admin_email="$WP_ADMIN_EMAIL" \
         --skip-email \
         --allow-root
@@ -56,7 +56,7 @@ if ! wp user get "$wp_user" --field=ID --allow-root >/dev/null 2>&1; then
         "$wp_user" \
         "$wp_user_email" \
         --role=subscriber \
-        --user_pass="$(cat /run/secrets/wp_user_password)" \
+        --user_pass="$WP_USER_PASSWORD" \
         --allow-root
 fi
 

@@ -27,4 +27,4 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 EXPOSE 9000
 
-CMD ["/usr/local/bin/init.sh"]
+ENTRYPOINT ["/usr/local/bin/init.sh"]

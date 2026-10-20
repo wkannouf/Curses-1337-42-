@@ -1,32 +1,25 @@
-COMPOSE := docker compose -f srcs/docker-compose.yml
+COMPOSE = docker compose -f srcs/docker-compose.yml
 
 all: up
 
-build:
-	$(COMPOSE) build
-
 up:
+	mkdir -p /home/wkannouf/data/mariadb
+	mkdir -p /home/wkannouf/data/wordpress
+	mkdir -p /home/wkannouf/data/portainer
 	$(COMPOSE) up -d --build
 
 down:
 	$(COMPOSE) down --remove-orphans
 
-restart:
-	$(COMPOSE) restart
-
-clean: down
-
 logs:
 	$(COMPOSE) logs -f
 
 fclean:
-	$(COMPOSE) down --volumes --remove-orphans
+	$(COMPOSE) down --volumes --rmi all --remove-orphans
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
 
 ps:
 	$(COMPOSE) ps
 
-.PHONY: all build up down restart clean logs fclean re ps
+.PHONY: all up down logs fclean re ps
