@@ -37,10 +37,6 @@ fi
 if [ ! -f "$init_marker" ]; then
     init_file=$(mktemp)
     chmod 600 "$init_file"
-<<<<<<< HEAD
-=======
-    chown mysql:mysql "$init_file"
->>>>>>> 69bdf28045a6b27ae988b57706be1a33bdbca9da
 
     cat > "$init_file" <<EOF
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD_SQL}';
@@ -51,11 +47,8 @@ FLUSH PRIVILEGES;
 SELECT 'initialized' INTO OUTFILE '${init_marker}';
 EOF
 
-<<<<<<< HEAD
 	chown mysql:mysql "$init_file"
 
-=======
->>>>>>> 69bdf28045a6b27ae988b57706be1a33bdbca9da
     exec mysqld --user=mysql --console --init-file="$init_file"
 fi
 

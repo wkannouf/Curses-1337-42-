@@ -4,11 +4,7 @@
 
 This document explains how to set up, build, run, and manage the Inception project from a developer point of view.
 
-<<<<<<< HEAD
 ## Environment Setup
-=======
-Copy `srcs/.env.example` to `srcs/.env`; it defines `DOMAIN_NAME`, `MYSQL_DATABASE`, `MYSQL_USER`, `WP_ADMIN_USER`, `WP_ADMIN_EMAIL`, `WP_USER`, and `WP_USER_EMAIL`. Create the ignored secret files `secrets/db_password.txt`, `secrets/db_root_password.txt`, `secrets/wp_admin_password.txt`, and `secrets/wp_user_password.txt`, then protect them with `chmod 600 secrets/*.txt`.
->>>>>>> 69bdf28045a6b27ae988b57706be1a33bdbca9da
 
 ### Prerequisites
 
