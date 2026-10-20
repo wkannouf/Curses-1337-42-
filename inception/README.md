@@ -56,6 +56,7 @@ This project uses Docker named volumes for WordPress files and MariaDB data to k
 
 ## Instructions
 
+<<<<<<< HEAD
 ### Requirements
 
 Before running the project, make sure you have:
@@ -73,6 +74,13 @@ Clone the repository:
 git clone https://github.com/wkannouf/Curses-1337-42-
 cd Curses-1337-42-/inception
 ```
+=======
+1. Configure Docker's `data-root` under `/home/wkannouf/data/docker` on the virtual machine.
+2. Copy `srcs/.env.example` to `srcs/.env`, adapt its non-sensitive values, and create the four ignored files in `secrets/`.
+3. Add `127.0.0.1 wkannouf.42.fr` to the virtual machine's `/etc/hosts` file.
+4. Run `make`.
+5. Open `https://wkannouf.42.fr`. A self-signed certificate warning is expected.
+>>>>>>> 69bdf28045a6b27ae988b57706be1a33bdbca9da
 
 ### Build and Run
 
@@ -148,4 +156,10 @@ The main reference used for this project was the official Docker documentation:
 
 I also used AI as a learning and review tool. It was mainly used to get clearer explanations of Docker concepts, understand parts of the project in more detail, and review my code or configuration for possible mistakes.
 
+<<<<<<< HEAD
 AI was not used to replace the implementation of the project, but to help me better understand the technologies and verify my work.
+=======
+## AI usage
+
+AI was used to explain Docker concepts and to review the configuration. The implementation was checked manually, and the author must be able to explain every Dockerfile, Compose option, script, volume, network, and security choice during the evaluation.
+>>>>>>> 69bdf28045a6b27ae988b57706be1a33bdbca9da
