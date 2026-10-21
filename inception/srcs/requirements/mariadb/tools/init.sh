@@ -22,7 +22,7 @@ case "$MYSQL_USER" in ''|*[!a-zA-Z0-9_]* )
 esac
 
 sql_escape() {
-    printf '%s' "$1" | sed "s/'/''/g"
+    printf '%s' "$1" | sed "s/'/''/g; 's/\\/\\\\g"
 }
 
 DB_ROOT_PASSWORD_SQL=$(sql_escape "$DB_ROOT_PASSWORD")
