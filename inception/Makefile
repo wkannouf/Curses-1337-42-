@@ -5,7 +5,6 @@ all: up
 up:
 	mkdir -p /home/wkannouf/data/mariadb
 	mkdir -p /home/wkannouf/data/wordpress
-	mkdir -p /home/wkannouf/data/portainer
 	$(COMPOSE) up -d --build
 
 down:
